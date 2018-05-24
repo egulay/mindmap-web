@@ -1,0 +1,19 @@
+.login-form {
+  width: auto;
+  height: auto;
+}
+
+.login-full-width {
+  width: 100%;
+}
+
+.login-button-row {
+  display: flex;
+  align-items: right;
+  justify-content: space-around;
+}
+
+.login-card {
+  width: 400px;
+  height: 300px;
+}
