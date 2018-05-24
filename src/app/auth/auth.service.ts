@@ -55,7 +55,7 @@ export class AuthService {
 
     this.http.post<LoginResponse>('http://localhost:8080/oauth/token', params, {headers: headers}).subscribe((data) => {
         this.saveToken(data.access_token);
-        this.loggedIn.next(false);
+        this.loggedIn.next(true);
       }, () => this.snackBar.open('Invalid Credentials', 'Error', {
         duration: 2000,
         politeness: 'polite'

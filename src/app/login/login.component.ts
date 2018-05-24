@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       'Content-type': 'application/json; charset=utf-8'
     });
 
-    return this.http.get<Actuator>('http://localhost:8080/application/health', {headers: httpHeaders});
+    return this.http.get<Actuator>('http://localhost:8080/actuator/health', {headers: httpHeaders});
   }
 
   ngOnInit() {
