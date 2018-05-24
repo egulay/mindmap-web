@@ -1,1 +1,51 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+h1, h2, h3, h4 {
+  font-weight: normal;
+}
+
+.middle-centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.top-centered {
+  position: fixed;
+  top: 10%;
+  left: 40%;
+  transform: translate(-10%, -10%);
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.default-card {
+  width: auto;
+  height: 100%;
+}
+
+.animal-font-green {
+  color: green;
+  font-size: 12vw;
+  font-family: 'Roboto', sans-serif
+}
+
+.animal-font-red {
+  color: green;
+  font-size: 12vw;
+  font-family: 'Roboto', sans-serif
+}
+
+.page {
+  min-height: 80%;
+  position: relative;
+}
+
+.parent {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
