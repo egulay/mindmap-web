@@ -1,0 +1,12 @@
+ <div *ngIf="isLoggedIn$ | async as isLoggedIn">
+   <mat-toolbar color="primary" *ngIf="isLoggedIn">
+     <mat-icon>face</mat-icon>&nbsp;&nbsp;
+     <span mat-line>{{currentUser}}</span>
+     <span class="fill-remaining-space"></span>
+     <div mat-card-avatar class="t-mobile-header-image-big"></div>
+     <span class="fill-remaining-space"></span>
+     <button mat-button (click)="onLogout()" *ngIf="isLoggedIn">Logout</button>
+   </mat-toolbar>
+ </div>
+
+
