@@ -18,12 +18,15 @@ import {AuthGuard} from './auth/auth.guard';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import 'hammerjs';
+import { HeaderComponent } from './header/header.component';
+import {MatIconRegistry} from '@angular/material';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule
@@ -36,7 +39,8 @@ import 'hammerjs';
   ],
   providers: [
     AuthService,
-    AuthGuard
+    AuthGuard,
+    MatIconRegistry
   ],
   bootstrap: [AppComponent]
 })

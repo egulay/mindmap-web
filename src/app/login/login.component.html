@@ -1,6 +1,8 @@
 <div class="middle-centered">
   <mat-card class="login-card">
     <mat-card-header>
+      <div mat-card-avatar class="t-mobile-header-image"></div>
+      &nbsp;&nbsp;&nbsp;&nbsp;
       <mat-card-title>Login</mat-card-title>
       <mat-card-subtitle>Please provide your user name and password</mat-card-subtitle>
     </mat-card-header>
@@ -26,12 +28,12 @@
         <div class="login-button-row">
           <button #btnLogin mat-raised-button color="primary" type="submit" (keyup.enter)="onSubmit()">Login</button>
         </div>
+        <br>
+        <div>
+          <span>Server status is <span [ngStyle]="{'color': serverStatus === 'up' ? 'green' : 'red'}"><strong>{{serverStatus ? 'up' : 'down'}}</strong></span></span>
+        </div>
       </form>
+      <br>
     </mat-card-content>
-    <mat-toolbar-row>
-      <div class="login-button-row">
-        <span>Server status is <span [ngStyle]="{'color': serverStatus === 'up' ? 'green' : 'red'}"><strong>{{serverStatus ? 'up' : 'down'}}</strong></span></span>
-      </div>
-    </mat-toolbar-row>
   </mat-card>
 </div>

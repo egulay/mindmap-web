@@ -6,21 +6,25 @@ import {
   Router
 } from '@angular/router';
 import {AuthService} from './auth.service';
-import {Observable} from 'rxjs';
-import {map, take} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+  private IsLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(
     private authService: AuthService,
-    private router: Router) {}
+    private router: Router) {
+  }
 
-  canActivate() {
-    if (localStorage.getItem('access_token')) {
-      return true;
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> {
+    this.authService.isLoggedIn.subscribe(val => this.IsLoggedIn.next(val));
+    if (!this.IsLoggedIn) {
+      this.router.navigate(['/login']);
     }
-
-    this.router.navigate(['/login']);
-    return false;
+    return this.IsLoggedIn.asObservable();
   }
 }

@@ -11,7 +11,7 @@ export class AuthService {
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   get isLoggedIn() {
-    this.loggedIn.next(localStorage.getItem('access_token') === null);
+    this.loggedIn.next(localStorage.getItem('access_token') !== null);
     return this.loggedIn.asObservable();
   }
 
@@ -47,13 +47,13 @@ export class AuthService {
     params = params.append('grant_type', 'password');
     params = params.append('client_id', 'mindmap');
 
-    const headers = new HttpHeaders({
+    const httpHeaders = new HttpHeaders({
       'Content-type': 'application/x-www-form-urlencoded'
       , 'Authorization': 'Basic ' + btoa('mindmap:secret')
       , 'Accept': 'application/json'
     });
 
-    this.http.post<LoginResponse>('http://localhost:8080/oauth/token', params, {headers: headers}).subscribe((data) => {
+    this.http.post<LoginResponse>('http://localhost:8080/oauth/token', params, {headers: httpHeaders}).subscribe((data) => {
         this.saveToken(data.access_token);
         this.loggedIn.next(true);
       }, () => this.snackBar.open('Invalid Credentials', 'Error', {
@@ -66,5 +66,6 @@ export class AuthService {
   logout() {
     localStorage.removeItem('access_token');
     this.loggedIn.next(false);
+    this.router.navigate(['/login']);
   }
 }
