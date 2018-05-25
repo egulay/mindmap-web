@@ -17,9 +17,21 @@ h1, h2, h3, h4 {
   font-weight: normal;
 }
 
+.fullScreen {
+  position: absolute;
+  min-height: 100% !important;
+}
+
 .t-mobile-header-image {
   background-image: url(t-mobile-icon.png);
   background-size: cover;
+}
+
+.t-mobile-header-image-big {
+  background-image: url(t-mobile-icon.png);
+  background-size: cover;
+  height: 42px;
+  width: 42px;
 }
 
 .middle-centered {
