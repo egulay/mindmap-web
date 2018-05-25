@@ -21,12 +21,15 @@ import 'hammerjs';
 import { HeaderComponent } from './header/header.component';
 import {MatIconRegistry} from '@angular/material';
 
+import {TreeModule} from 'primeng/tree';
+import {ContextMenuModule} from 'primeng/contextmenu';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule
@@ -36,6 +39,8 @@ import {MatIconRegistry} from '@angular/material';
     , FormsModule
     , BrowserAnimationsModule
     , ReactiveFormsModule
+    , TreeModule
+    , ContextMenuModule
   ],
   providers: [
     AuthService,

@@ -3,6 +3,10 @@
 @import url('//fonts.googleapis.com/icon?family=Material+Icons');
 @import url('//fonts.googleapis.com/css?family=Roboto:300,400,500');
 
+@import '~primeng/resources/primeng.css';
+@import '~primeng/resources/themes/omega/theme.css';
+@import '~font-awesome/css/font-awesome.min.css';
+
 @include mat-core();
 
 $primary: mat-palette($mat-gray, 600);
@@ -17,10 +21,10 @@ h1, h2, h3, h4 {
   font-weight: normal;
 }
 
-.fullScreen {
-  position: absolute;
-  min-height: 100% !important;
-}
+//.fullScreen {
+//  position: absolute;
+//  min-height: 100% !important;
+//}
 
 .t-mobile-header-image {
   background-image: url(t-mobile-icon.png);
