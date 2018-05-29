@@ -1,6 +1,6 @@
 declare module TestTree {
 
-  export interface InnerChildren {
+  export interface Leaf {
     label: string;
     icon: string;
     data: string;
@@ -11,7 +11,7 @@ declare module TestTree {
     data: string;
     expandedIcon: string;
     collapsedIcon: string;
-    children: InnerChildren[];
+    children: Leaf[];
     icon: string;
   }
 

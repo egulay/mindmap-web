@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth/auth.service';
-import {MenuItem, Message, TreeNode} from 'primeng/api';
+import {MenuItem, TreeNode} from 'primeng/api';
 import {NodeService} from '../service/node.service';
 import {MatSnackBar} from '@angular/material';
 
@@ -15,17 +15,23 @@ export class DashboardComponent implements OnInit {
   files: TreeNode[];
   selectedFile: TreeNode;
   items: MenuItem[];
-  msgs: Message[];
 
-  constructor(private router: Router, private auth: AuthService, private nodeService: NodeService, public snackBar: MatSnackBar) { }
+  constructor(private router: Router, private auth: AuthService, private nodeService: NodeService, public snackBar: MatSnackBar) {
+  }
 
   ngOnInit() {
-    this.nodeService.getTestData().then(files => {
-      this.files = [{
-        label: 'Root',
-        children: files
-      }];
-    });
+    // this.getITData();
+    // this.getTestData();
+
+    const f = [
+      'folderA|file1.txt',
+      'folderA|file2.txt',
+      'folderA|folderB|file1.txt',
+      'folderA|folderB|file2.txt',
+      'folderC|file1.txt'
+    ];
+
+    this.files = f.reduce(this.reducePath, []);
 
     this.items = [
       {label: 'Add New', command: () => this.addNew(this.selectedFile)},
@@ -33,7 +39,61 @@ export class DashboardComponent implements OnInit {
     ];
   }
 
+  reducePath = (nodes: TreeNode[], path: string) => {
+    const split = path.split('|');
+
+    if (split.length === 1) {
+      return [
+        ...nodes,
+        {
+          label: split[0],
+          icon: 'fa-file-o'
+        }
+      ];
+    }
+
+    if (nodes.findIndex(n => n.label === split[0]) === -1) {
+      return [
+        ...nodes,
+        {
+          label: split[0],
+          icon: 'fa-folder',
+          children: this.reducePath([], split.slice(1).join('|'))
+        }
+      ];
+    }
+
+    return nodes.map(n => {
+      if (n.label !== split[0]) {
+        return n;
+      }
+
+      return Object.assign({}, n, {
+        children: this.reducePath(n.children, split.slice(1).join('|'))
+      });
+    });
+  }
+
+  getITData() {
+    this.nodeService.getITData().then(files => {
+      this.files = [{
+        label: 'Root',
+        children: files
+      }];
+    });
+  }
+
+  getTestData() {
+    this.nodeService.getTestData().then(files => {
+      this.files = [{
+        label: 'Root',
+        children: files
+      }];
+    });
+  }
+
   addNew(file: TreeNode) {
+    console.log(this.files);
     this.snackBar.open('Add dialog will be here..', 'Info', {
       duration: 2000,
       politeness: 'assertive'
@@ -47,5 +107,24 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  expandAll() {
+    this.files.forEach(node => {
+      this.expandRecursive(node, true);
+    });
+  }
 
+  collapseAll() {
+    this.files.forEach(node => {
+      this.expandRecursive(node, false);
+    });
+  }
+
+  private expandRecursive(node: TreeNode, isExpand: boolean) {
+    node.expanded = isExpand;
+    if (node.children) {
+      node.children.forEach(childNode => {
+        this.expandRecursive(childNode, isExpand);
+      });
+    }
+  }
 }
