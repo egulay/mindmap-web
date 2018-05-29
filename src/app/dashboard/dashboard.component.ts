@@ -93,8 +93,8 @@ export class DashboardComponent implements OnInit {
   addNew(file: TreeNode) {
     const dialogRef = this.dialog.open(AddNewNodeDialogComponent, {
       autoFocus: false,
-      width: '20px',
-      height: '20px',
+      width: '600px',
+      height: '400px',
       data: {label: this.newLabel}
     });
 
