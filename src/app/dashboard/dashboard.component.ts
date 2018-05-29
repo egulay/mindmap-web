@@ -20,18 +20,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getITData();
-    // this.getTestData();
-
-    const f = [
-      'folderA|file1.txt',
-      'folderA|file2.txt',
-      'folderA|folderB|file1.txt',
-      'folderA|folderB|file2.txt',
-      'folderC|file1.txt'
-    ];
-
-    this.files = f.reduce(this.reducePath, []);
+    this.getITData();
 
     this.items = [
       {label: 'Add New', command: () => this.addNew(this.selectedFile)},
@@ -76,10 +65,8 @@ export class DashboardComponent implements OnInit {
 
   getITData() {
     this.nodeService.getITData().then(files => {
-      this.files = [{
-        label: 'Root',
-        children: files
-      }];
+      this.files = files.reduce(this.reducePath, []);
+
     });
   }
 

@@ -22,8 +22,11 @@ export class NodeService {
       , 'Authorization': 'Bearer ' + localStorage.getItem('access_token')
     });
 
-    return this.http.get<TreeObject>('http://localhost:8080/api/node/getTree/5b0be222f3be1b388cdc8dfd', {headers: httpHeaders})
-      .toPromise()
-      .then(res => <TreeNode[]> res.data);
+    // return this.http.get<TreeObject>('http://localhost:8080/api/tree/5b0be222f3be1b388cdc8dfd', {headers: httpHeaders})
+    //   .toPromise()
+    //   .then(res => <TreeNode[]> res.data);
+
+    return this.http.get<String[]>('http://localhost:8080/api/tree/5b0be222f3be1b388cdc8dfd', {headers: httpHeaders})
+      .toPromise();
   }
 }
