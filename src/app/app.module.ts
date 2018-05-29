@@ -19,10 +19,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import 'hammerjs';
 import { HeaderComponent } from './header/header.component';
-import {MatIconRegistry} from '@angular/material';
+import {MAT_DIALOG_DEFAULT_OPTIONS, MatIconRegistry} from '@angular/material';
 
 import {TreeModule} from 'primeng/tree';
 import {ContextMenuModule} from 'primeng/contextmenu';
+import { AddNewNodeDialogComponent } from './add-new-node-dialog/add-new-node-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {ContextMenuModule} from 'primeng/contextmenu';
     LoginComponent,
     DashboardComponent,
     HeaderComponent,
+    AddNewNodeDialogComponent,
   ],
   imports: [
     BrowserModule
@@ -45,7 +47,11 @@ import {ContextMenuModule} from 'primeng/contextmenu';
   providers: [
     AuthService,
     AuthGuard,
-    MatIconRegistry
+    MatIconRegistry,
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+  ],
+  entryComponents: [
+    AddNewNodeDialogComponent
   ],
   bootstrap: [AppComponent]
 })

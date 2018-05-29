@@ -2,7 +2,6 @@
 @import '~@angular/material/theming';
 @import url('//fonts.googleapis.com/icon?family=Material+Icons');
 @import url('//fonts.googleapis.com/css?family=Roboto:300,400,500');
-
 @import '~primeng/resources/primeng.css';
 @import '~primeng/resources/themes/omega/theme.css';
 @import '~font-awesome/css/font-awesome.min.css';
@@ -65,6 +64,27 @@ h1, h2, h3, h4 {
   color: green;
   font-size: 12vw;
   font-family: 'Roboto', sans-serif
+}
+
+//.mat-dialog-container {
+//  width: 20px;
+//  height: 20px;
+//  position: fixed;
+//  top: 50%;
+//  left: 50%;
+//  transform: translate(-50%, -50%);
+//}
+
+.voted-font-magenta span.ui-treenode-label  {
+  color:magenta;
+  font-size: medium;
+  font-family: 'Roboto', sans-serif;
+}
+
+.node-font-black span.ui-treenode-label  {
+  color:black;
+  font-size: medium;
+  font-family: 'Roboto', sans-serif;
 }
 
 .animal-font-red {

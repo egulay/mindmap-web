@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth/auth.service';
 import {MenuItem, TreeNode} from 'primeng/api';
 import {NodeService} from '../service/node.service';
-import {MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {NewNode} from '../model/newNode';
+import {AddNewNodeDialogComponent} from '../add-new-node-dialog/add-new-node-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +18,13 @@ export class DashboardComponent implements OnInit {
   selectedFile: TreeNode;
   items: MenuItem[];
 
-  constructor(private router: Router, private auth: AuthService, private nodeService: NodeService, public snackBar: MatSnackBar) {
+  newLabel: String;
+
+  constructor(private router: Router
+    , private auth: AuthService
+    , private nodeService: NodeService
+    , public snackBar: MatSnackBar
+    , public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -36,7 +44,8 @@ export class DashboardComponent implements OnInit {
         ...nodes,
         {
           label: split[0],
-          icon: 'fa-file-o'
+          icon: 'fa-file-o',
+          expanded: true,
         }
       ];
     }
@@ -47,7 +56,8 @@ export class DashboardComponent implements OnInit {
         {
           label: split[0],
           icon: 'fa-folder',
-          children: this.reducePath([], split.slice(1).join('|'))
+          expanded: true,
+          children: this.reducePath([], split.slice(1).join('|')),
         }
       ];
     }
@@ -61,12 +71,13 @@ export class DashboardComponent implements OnInit {
         children: this.reducePath(n.children, split.slice(1).join('|'))
       });
     });
-  }
+  };
 
   getITData() {
-    this.nodeService.getITData().then(files => {
-      this.files = files.reduce(this.reducePath, []);
-
+    this.files = [];
+    this.nodeService.getData('5b0be222f3be1b388cdc8dfd').then(files => {
+      this.files = files.treeNodes.reduce(this.reducePath, []);
+      this.setVoted(files.voteWinnerLabel);
     });
   }
 
@@ -80,11 +91,29 @@ export class DashboardComponent implements OnInit {
   }
 
   addNew(file: TreeNode) {
-    console.log(this.files);
-    this.snackBar.open('Add dialog will be here..', 'Info', {
-      duration: 2000,
-      politeness: 'assertive'
+    const dialogRef = this.dialog.open(AddNewNodeDialogComponent, {
+      autoFocus: false,
+      width: '20px',
+      height: '20px',
+      data: {label: this.newLabel}
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      const node: NewNode = {
+        departmentId: '5b0be222f3be1b388cdc8dfd',
+        label: result,
+        parentLabel: file.label
+      };
+
+      this.nodeService.saveNode(node).then(() => this.getITData());
+
+      this.snackBar.open('Saved: '.concat(node.label), 'Info', {
+        duration: 2000,
+        politeness: 'assertive'
+      });
+    });
+
+
   }
 
   vote(file: TreeNode) {
@@ -92,6 +121,24 @@ export class DashboardComponent implements OnInit {
       duration: 2000,
       politeness: 'assertive'
     });
+  }
+
+  setVoted(label: String) {
+    this.files.forEach(node => {
+      this.setVotedRecursive(node, label);
+    });
+  }
+
+  setVotedRecursive(node: TreeNode, label: String) {
+    if (node.label === label) {
+      node.styleClass = 'voted-font-magenta';
+    }
+    if (node.children) {
+      node.children.forEach(childNode => {
+        childNode.styleClass = 'node-font-black';
+        this.setVotedRecursive(childNode, label);
+      });
+    }
   }
 
   expandAll() {
