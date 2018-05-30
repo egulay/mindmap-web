@@ -83,11 +83,16 @@ export class DashboardComponent implements OnInit {
       this.setVoted(files.rootLabel, files);
 
       this.popularItems = [
-        {position: 1, items: files.winners.winnersLvlOne !== null ? files.winners.winnersLvlOne.toString().split(',').join(', ') : ''},
-        {position: 2, items: files.winners.winnersLvlTwo !== null ? files.winners.winnersLvlTwo.toString().split(',').join(', ') : ''},
-        {position: 3, items: files.winners.winnersLvlThree !== null ? files.winners.winnersLvlThree.toString().split(',').join(', ') : ''},
-        {position: 4, items: files.winners.winnersLvlFour !== null ? files.winners.winnersLvlFour.toString().split(',').join(', ') : ''},
-        {position: 5, items: files.winners.winnersLvlFive !== null ? files.winners.winnersLvlFive.toString().split(',').join(', ') : ''}
+        {position: 1, items: files.winners.winnersLvlOne !== null ? files.winners.winnersLvlOne.toString()
+            .split(',').join(', ').concat(' (').concat(files.winners.percentOne).concat(')') : ''},
+        {position: 2, items: files.winners.winnersLvlTwo !== null ? files.winners.winnersLvlTwo.toString()
+            .split(',').join(', ').concat(' (').concat(files.winners.percentTwo).concat(')') : ''},
+        {position: 3, items: files.winners.winnersLvlThree !== null ? files.winners.winnersLvlThree.toString()
+            .split(',').join(', ').concat(' (').concat(files.winners.percentThree).concat(')') : ''},
+        {position: 4, items: files.winners.winnersLvlFour !== null ? files.winners.winnersLvlFour.toString()
+            .split(',').join(', ').concat(' (').concat(files.winners.percentFour).concat(')') : ''},
+        {position: 5, items: files.winners.winnersLvlFive !== null ? files.winners.winnersLvlFive.toString()
+            .split(',').join(', ').concat(' (').concat(files.winners.percentFive).concat(')') : ''},
       ];
 
     });
@@ -125,16 +130,16 @@ export class DashboardComponent implements OnInit {
           this.setVoted(files.rootLabel, files);
 
           this.popularItems = [
-            {position: 1, items: files.winners.winnersLvlOne !== null
-                ? files.winners.winnersLvlOne.toString().split(',').join(', ') : ''},
-            {position: 2, items: files.winners.winnersLvlTwo !== null
-                ? files.winners.winnersLvlTwo.toString().split(',').join(', ') : ''},
-            {position: 3, items: files.winners.winnersLvlThree !== null
-                ? files.winners.winnersLvlThree.toString().split(',').join(', ') : ''},
-            {position: 4, items: files.winners.winnersLvlFour !== null
-                ? files.winners.winnersLvlFour.toString().split(',').join(', ') : ''},
-            {position: 5, items: files.winners.winnersLvlFive !== null
-                ? files.winners.winnersLvlFive.toString().split(',').join(', ') : ''}
+            {position: 1, items: files.winners.winnersLvlOne !== null ? files.winners.winnersLvlOne.toString()
+                .split(',').join(', ').concat(' (').concat(files.winners.percentOne).concat(')') : ''},
+            {position: 2, items: files.winners.winnersLvlTwo !== null ? files.winners.winnersLvlTwo.toString()
+                .split(',').join(', ').concat(' (').concat(files.winners.percentTwo).concat(')') : ''},
+            {position: 3, items: files.winners.winnersLvlThree !== null ? files.winners.winnersLvlThree.toString()
+                .split(',').join(', ').concat(' (').concat(files.winners.percentThree).concat(')') : ''},
+            {position: 4, items: files.winners.winnersLvlFour !== null ? files.winners.winnersLvlFour.toString()
+                .split(',').join(', ').concat(' (').concat(files.winners.percentFour).concat(')') : ''},
+            {position: 5, items: files.winners.winnersLvlFive !== null ? files.winners.winnersLvlFive.toString()
+                .split(',').join(', ').concat(' (').concat(files.winners.percentFive).concat(')') : ''},
           ];
 
           this.snackBar.open('Saved: '.concat(node.label), 'Info', {duration: 2000, politeness: 'assertive'});
@@ -149,11 +154,16 @@ export class DashboardComponent implements OnInit {
       this.files = files.treeNodes.reduce(this.reducePath, []);
 
       this.popularItems = [
-        {position: 1, items: files.winners.winnersLvlOne !== null ? files.winners.winnersLvlOne.toString().split(',').join(', ') : ''},
-        {position: 2, items: files.winners.winnersLvlTwo !== null ? files.winners.winnersLvlTwo.toString().split(',').join(', ') : ''},
-        {position: 3, items: files.winners.winnersLvlThree !== null ? files.winners.winnersLvlThree.toString().split(',').join(', ') : ''},
-        {position: 4, items: files.winners.winnersLvlFour !== null ? files.winners.winnersLvlFour.toString().split(',').join(', ') : ''},
-        {position: 5, items: files.winners.winnersLvlFive !== null ? files.winners.winnersLvlFive.toString().split(',').join(', ') : ''}
+        {position: 1, items: files.winners.winnersLvlOne !== null ? files.winners.winnersLvlOne.toString()
+            .split(',').join(', ').concat(' (').concat(files.winners.percentOne).concat(')') : ''},
+        {position: 2, items: files.winners.winnersLvlTwo !== null ? files.winners.winnersLvlTwo.toString()
+            .split(',').join(', ').concat(' (').concat(files.winners.percentTwo).concat(')') : ''},
+        {position: 3, items: files.winners.winnersLvlThree !== null ? files.winners.winnersLvlThree.toString()
+            .split(',').join(', ').concat(' (').concat(files.winners.percentThree).concat(')') : ''},
+        {position: 4, items: files.winners.winnersLvlFour !== null ? files.winners.winnersLvlFour.toString()
+            .split(',').join(', ').concat(' (').concat(files.winners.percentFour).concat(')') : ''},
+        {position: 5, items: files.winners.winnersLvlFive !== null ? files.winners.winnersLvlFive.toString()
+            .split(',').join(', ').concat(' (').concat(files.winners.percentFive).concat(')') : ''},
       ];
 
       this.setVoted(files.rootLabel, files);

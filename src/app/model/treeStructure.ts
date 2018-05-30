@@ -14,5 +14,11 @@ declare module TreeStructure {
     winnersLvlFour: string[];
     winnersLvlFive: string[];
     allWinners: string[];
+
+    percentOne: string;
+    percentTwo: string;
+    percentThree: string;
+    percentFour: string;
+    percentFive: string;
   }
 }
