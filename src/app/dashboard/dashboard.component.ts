@@ -80,7 +80,7 @@ export class DashboardComponent implements OnInit {
     this.files = [];
     this.nodeService.getData('5b0be222f3be1b388cdc8dfd').then(files => {
       this.files = files.treeNodes.reduce(this.reducePath, []);
-      this.setVoted('Culture of Innovation', files);
+      this.setVoted(files.rootLabel, files);
 
       this.popularItems = [
         {position: 1, items: files.winners.winnersLvlOne !== null ? files.winners.winnersLvlOne.toString() : ''},
@@ -122,7 +122,7 @@ export class DashboardComponent implements OnInit {
         this.nodeService.saveNode(node).then(files => {
           this.files = [];
           this.files = files.treeNodes.reduce(this.reducePath, []);
-          this.setVoted('Culture of Innovation', files);
+          this.setVoted(files.rootLabel, files);
 
           this.popularItems = [
             {position: 1, items: files.winners.winnersLvlOne !== null ? files.winners.winnersLvlOne.toString() : ''},
@@ -151,7 +151,7 @@ export class DashboardComponent implements OnInit {
         {position: 5, items: files.winners.winnersLvlFive !== null ? files.winners.winnersLvlFive.toString() : ''}
       ];
 
-      this.setVoted('Culture of Innovation', files);
+      this.setVoted(files.rootLabel, files);
       this.snackBar.open('Voted: '.concat(file.label), 'Info', {
         duration: 2000,
         politeness: 'assertive'

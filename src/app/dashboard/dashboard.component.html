@@ -1,13 +1,8 @@
 <mat-card>
   <mat-card-header>
-
-
-
     <mat-card-title><strong>Mind Map</strong></mat-card-title>
     <mat-card-subtitle>Most Popular</mat-card-subtitle>
-
     <mat-list>
-
       <mat-list-item *ngFor="let i of popularItems">
         <span>{{i.position}}. {{i.items}}</span>
       </mat-list-item>
@@ -15,11 +10,11 @@
   </mat-card-header>
   <mat-card-content>
 
-      <div style="font-family: Roboto, sans-serif;font-size: medium">
-        <p-tree #$mindMapTree [value]="files" layout="horizontal" selectionMode="single" [(selection)]="selectedFile"
-                [contextMenu]="cm"></p-tree>
-        <p-contextMenu styleClass="mat-menu-panel" appendTo="body" #cm [model]="items"></p-contextMenu>
-        <div style="margin-top:8px">Selected Node: {{selectedFile ? selectedFile.label : 'none'}}</div>
-      </div>
+    <div style="font-family: Roboto, sans-serif;font-size: medium">
+      <p-tree #$mindMapTree [value]="files" layout="horizontal" selectionMode="single" [(selection)]="selectedFile"
+              [contextMenu]="cm"></p-tree>
+      <p-contextMenu styleClass="mat-menu-panel" appendTo="body" #cm [model]="items"></p-contextMenu>
+      <div style="margin-top:8px">Selected Node: {{selectedFile ? selectedFile.label : 'none'}}</div>
+    </div>
   </mat-card-content>
 </mat-card>

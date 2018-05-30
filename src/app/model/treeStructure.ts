@@ -4,6 +4,7 @@ declare module TreeStructure {
     departmentId: String;
     voteWinnerLabel: String;
     winners: Winners;
+    rootLabel: String;
   }
 
   export interface Winners {
