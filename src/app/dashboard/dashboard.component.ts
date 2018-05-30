@@ -18,8 +18,6 @@ export class DashboardComponent implements OnInit {
   selectedFile: TreeNode;
   items: MenuItem[];
 
-  newLabel: String;
-
   constructor(private router: Router
     , private auth: AuthService
     , private nodeService: NodeService
@@ -46,6 +44,7 @@ export class DashboardComponent implements OnInit {
           label: split[0],
           icon: 'fa-file-o',
           expanded: false,
+
         }
       ];
     }
@@ -77,7 +76,7 @@ export class DashboardComponent implements OnInit {
     this.files = [];
     this.nodeService.getData('5b0be222f3be1b388cdc8dfd').then(files => {
       this.files = files.treeNodes.reduce(this.reducePath, []);
-      this.setVoted(files.voteWinnerLabel);
+      this.setVoted('Culture of Innovation', files);
     });
   }
 
@@ -96,8 +95,7 @@ export class DashboardComponent implements OnInit {
     const dialogRef = this.dialog.open(AddNewNodeDialogComponent, {
       autoFocus: false,
       width: '600px',
-      height: '280px',
-      data: {labelName: this.newLabel}
+      height: '280px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -111,7 +109,7 @@ export class DashboardComponent implements OnInit {
         this.nodeService.saveNode(node).then(files => {
           this.files = [];
           this.files = files.treeNodes.reduce(this.reducePath, []);
-          this.setVoted(files.voteWinnerLabel);
+          this.setVoted('Culture of Innovation', files);
 
           this.snackBar.open('Saved: '.concat(node.label), 'Info', {duration: 2000, politeness: 'assertive'});
         });
@@ -123,7 +121,12 @@ export class DashboardComponent implements OnInit {
     this.nodeService.addVote('5b0be222f3be1b388cdc8dfd', file.label).then(files => {
       this.files = [];
       this.files = files.treeNodes.reduce(this.reducePath, []);
-      this.setVoted(files.voteWinnerLabel);
+
+      // this.files.forEach(node => {
+      //   this.resetAllStylesRecursive(node);
+      // });
+
+      this.setVoted('Culture of Innovation', files);
       this.snackBar.open('Voted: '.concat(file.label), 'Info', {
         duration: 2000,
         politeness: 'assertive'
@@ -131,46 +134,78 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  setVoted(label: String) {
+  setVoted(label: String, tree: TreeStructure.TreeNodes) {
     this.files.forEach(node => {
-      this.setVotedRecursive(node, label);
+      this.setVotedRecursive(node, tree);
     });
   }
 
-  setVotedRecursive(node: TreeNode, label: String) {
-    if (node.label === label) {
-      node.styleClass = 'voted-font-magenta';
-      if (node.children) {
-        node.children.forEach(childNode => {
-          childNode.styleClass = 'node-font-black';
-        });
+  resetAllStylesRecursive(node) {
+    node.styleClass = 'node-font-black';
+    if (node.children) {
+      this.resetAllStylesRecursive(node);
+    }
+  }
+
+  setVotedRecursive(node: TreeNode, tree: TreeStructure.TreeNodes) {
+    if (tree.winners.winnersLvlOne !== null) {
+      if (tree.winners.winnersLvlOne.includes(node.label)) {
+        node.styleClass = 'most-voted-font-magenta';
+        if (node.children) {
+          node.children.forEach(childNode => {
+            childNode.styleClass = 'node-font-black';
+          });
+        }
+      }
+    }
+
+    if (tree.winners.winnersLvlTwo !== null) {
+      if (tree.winners.winnersLvlTwo.includes(node.label)) {
+        node.styleClass = 'second-voted-font-magenta';
+        if (node.children) {
+          node.children.forEach(childNode => {
+            childNode.styleClass = 'node-font-black';
+          });
+        }
+      }
+    }
+
+    if (tree.winners.winnersLvlThree !== null) {
+      if (tree.winners.winnersLvlThree.includes(node.label)) {
+        node.styleClass = 'third-voted-font-magenta';
+        if (node.children) {
+          node.children.forEach(childNode => {
+            childNode.styleClass = 'node-font-black';
+          });
+        }
+      }
+    }
+
+    if (tree.winners.winnersLvlFour !== null) {
+      if (tree.winners.winnersLvlFour.includes(node.label)) {
+        node.styleClass = 'forth-voted-font-magenta';
+        if (node.children) {
+          node.children.forEach(childNode => {
+            childNode.styleClass = 'node-font-black';
+          });
+        }
+      }
+    }
+
+    if (tree.winners.winnersLvlFive !== null) {
+      if (tree.winners.winnersLvlFive.includes(node.label)) {
+        node.styleClass = 'fifth-voted-font-magenta';
+        if (node.children) {
+          node.children.forEach(childNode => {
+            childNode.styleClass = 'node-font-black';
+          });
+        }
       }
     }
 
     if (node.children) {
       node.children.forEach(childNode => {
-        this.setVotedRecursive(childNode, label);
-      });
-    }
-  }
-
-  expandAll() {
-    this.files.forEach(node => {
-      this.expandRecursive(node, true);
-    });
-  }
-
-  collapseAll() {
-    this.files.forEach(node => {
-      this.expandRecursive(node, false);
-    });
-  }
-
-  private expandRecursive(node: TreeNode, isExpand: boolean) {
-    node.expanded = isExpand;
-    if (node.children) {
-      node.children.forEach(childNode => {
-        this.expandRecursive(childNode, isExpand);
+        this.setVotedRecursive(childNode, tree);
       });
     }
   }

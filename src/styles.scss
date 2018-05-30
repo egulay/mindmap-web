@@ -66,17 +66,45 @@ h1, h2, h3, h4 {
   font-family: 'Roboto', sans-serif
 }
 
-.voted-font-magenta span.ui-treenode-label {
-  color: #ea0a8e;
-  font-size: x-large;
-  font-weight: bold;
+.most-voted-font-magenta span.ui-treenode-label {
+  color: #ea0a8e !important;
+  font-size: xx-large !important;
+  font-weight: bold !important;
+  font-family: 'Roboto', sans-serif;
+}
+
+.second-voted-font-magenta span.ui-treenode-label {
+  color: #D90075 !important;
+  font-size: x-large !important;
+  font-weight: bold !important;
+  font-family: 'Roboto', sans-serif;
+}
+
+.third-voted-font-magenta span.ui-treenode-label {
+  color: #E4007A !important;
+  font-size: large !important;
+  font-weight: bold !important;
+  font-family: 'Roboto', sans-serif;
+}
+
+.forth-voted-font-magenta span.ui-treenode-label {
+  color: #F00080 !important;
+  font-size: medium !important;
+  font-weight: bold !important;
+  font-family: 'Roboto', sans-serif;
+}
+
+.fifth-voted-font-magenta span.ui-treenode-label {
+  color: #E96088 !important;
+  font-size: medium !important;
+  font-weight: normal !important;
   font-family: 'Roboto', sans-serif;
 }
 
 .node-font-black span.ui-treenode-label {
-  color: black;
-  font-size: medium;
-  font-weight: normal;
+  color: #000000 !important;
+  font-size: medium !important;
+  font-weight: normal !important;
   font-family: 'Roboto', sans-serif;
 }
 

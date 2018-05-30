@@ -3,8 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {TreeNode} from 'primeng/api';
 import TreeObject = TestTree.TreeObject;
 import {NewNode} from '../model/newNode';
-import {Observable} from 'rxjs';
-import {TreeNodes} from '../model/treeNodes';
+import TreeNodes = TreeStructure.TreeNodes;
+
 
 @Injectable({
   providedIn: 'root'
