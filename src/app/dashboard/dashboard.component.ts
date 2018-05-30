@@ -136,12 +136,24 @@ export class DashboardComponent implements OnInit {
 
   setVoted(label: String, tree: TreeStructure.TreeNodes) {
     this.files.forEach(node => {
-      if (tree.winners.allWinners.includes(node.label)) {
-        if (tree.winners.winnersLvlOne.includes(node.label)) {this.setVotedRecursive2(node, tree, 'most-voted-font-magenta'); }
-        if (tree.winners.winnersLvlTwo.includes(node.label)) {this.setVotedRecursive2(node, tree, 'second-voted-font-magenta'); }
-        if (tree.winners.winnersLvlThree.includes(node.label)) {this.setVotedRecursive2(node, tree, 'third-voted-font-magenta'); }
-        if (tree.winners.winnersLvlFour.includes(node.label)) {this.setVotedRecursive2(node, tree, 'fourth-voted-font-magenta'); }
-        if (tree.winners.winnersLvlFive.includes(node.label)) {this.setVotedRecursive2(node, tree, 'fifth-voted-font-magenta'); }
+      if (tree.winners.allWinners !== null) {
+        if (tree.winners.allWinners.includes(node.label)) {
+          if (tree.winners.winnersLvlOne.includes(node.label)) {
+            this.setVotedRecursive2(node, tree, 'most-voted-font-magenta');
+          }
+          if (tree.winners.winnersLvlTwo.includes(node.label)) {
+            this.setVotedRecursive2(node, tree, 'second-voted-font-magenta');
+          }
+          if (tree.winners.winnersLvlThree.includes(node.label)) {
+            this.setVotedRecursive2(node, tree, 'third-voted-font-magenta');
+          }
+          if (tree.winners.winnersLvlFour.includes(node.label)) {
+            this.setVotedRecursive2(node, tree, 'fourth-voted-font-magenta');
+          }
+          if (tree.winners.winnersLvlFive.includes(node.label)) {
+            this.setVotedRecursive2(node, tree, 'fifth-voted-font-magenta');
+          }
+        }
       }
     });
   }
@@ -158,6 +170,7 @@ export class DashboardComponent implements OnInit {
     if (node.children) {
       node.children.forEach(childNode => {
         childNode.styleClass = 'node-font-black';
+        this.setVotedRecursive2(childNode, tree, 'node-font-black');
       });
     }
   }

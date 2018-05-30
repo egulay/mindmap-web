@@ -12,5 +12,6 @@ declare module TreeStructure {
     winnersLvlThree: string[];
     winnersLvlFour: string[];
     winnersLvlFive: string[];
+    allWinners: string[];
   }
 }
