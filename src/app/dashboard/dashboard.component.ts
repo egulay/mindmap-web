@@ -6,6 +6,7 @@ import {NodeService} from '../service/node.service';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {NewNode} from '../model/newNode';
 import {AddNewNodeDialogComponent} from '../add-new-node-dialog/add-new-node-dialog.component';
+import {Popularity} from '../model/popularity';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +19,8 @@ export class DashboardComponent implements OnInit {
   files: TreeNode[];
   selectedFile: TreeNode;
   items: MenuItem[];
+
+  popularItems: Popularity[];
 
   constructor(private router: Router
     , private auth: AuthService
@@ -78,6 +81,15 @@ export class DashboardComponent implements OnInit {
     this.nodeService.getData('5b0be222f3be1b388cdc8dfd').then(files => {
       this.files = files.treeNodes.reduce(this.reducePath, []);
       this.setVoted('Culture of Innovation', files);
+
+      this.popularItems = [
+        {position: 1, items: files.winners.winnersLvlOne !== null ? files.winners.winnersLvlOne.toString() : ''},
+        {position: 2, items: files.winners.winnersLvlTwo !== null ? files.winners.winnersLvlTwo.toString() : ''},
+        {position: 3, items: files.winners.winnersLvlThree !== null ? files.winners.winnersLvlThree.toString() : ''},
+        {position: 4, items: files.winners.winnersLvlFour !== null ? files.winners.winnersLvlFour.toString() : ''},
+        {position: 5, items: files.winners.winnersLvlFive !== null ? files.winners.winnersLvlFive.toString() : ''}
+      ];
+
     });
   }
 
@@ -112,6 +124,14 @@ export class DashboardComponent implements OnInit {
           this.files = files.treeNodes.reduce(this.reducePath, []);
           this.setVoted('Culture of Innovation', files);
 
+          this.popularItems = [
+            {position: 1, items: files.winners.winnersLvlOne !== null ? files.winners.winnersLvlOne.toString() : ''},
+            {position: 2, items: files.winners.winnersLvlTwo !== null ? files.winners.winnersLvlTwo.toString() : ''},
+            {position: 3, items: files.winners.winnersLvlThree !== null ? files.winners.winnersLvlThree.toString() : ''},
+            {position: 4, items: files.winners.winnersLvlFour !== null ? files.winners.winnersLvlFour.toString() : ''},
+            {position: 5, items: files.winners.winnersLvlFive !== null ? files.winners.winnersLvlFive.toString() : ''}
+          ];
+
           this.snackBar.open('Saved: '.concat(node.label), 'Info', {duration: 2000, politeness: 'assertive'});
         });
       }
@@ -123,9 +143,13 @@ export class DashboardComponent implements OnInit {
       this.files = [];
       this.files = files.treeNodes.reduce(this.reducePath, []);
 
-      // this.files.forEach(node => {
-      //   this.resetAllStylesRecursive(node);
-      // });
+      this.popularItems = [
+        {position: 1, items: files.winners.winnersLvlOne !== null ? files.winners.winnersLvlOne.toString() : ''},
+        {position: 2, items: files.winners.winnersLvlTwo !== null ? files.winners.winnersLvlTwo.toString() : ''},
+        {position: 3, items: files.winners.winnersLvlThree !== null ? files.winners.winnersLvlThree.toString() : ''},
+        {position: 4, items: files.winners.winnersLvlFour !== null ? files.winners.winnersLvlFour.toString() : ''},
+        {position: 5, items: files.winners.winnersLvlFive !== null ? files.winners.winnersLvlFive.toString() : ''}
+      ];
 
       this.setVoted('Culture of Innovation', files);
       this.snackBar.open('Voted: '.concat(file.label), 'Info', {
@@ -137,25 +161,6 @@ export class DashboardComponent implements OnInit {
 
   setVoted(label: String, tree: TreeStructure.TreeNodes) {
     this.files.forEach(node => {
-      // if (tree.winners.allWinners !== null) {
-      //   if (tree.winners.allWinners.includes(node.label)) {
-      //     if (tree.winners.winnersLvlOne.includes(node.label)) {
-      //       this.setVotedRecursive2(node, tree, 'most-voted-font-magenta');
-      //     }
-      //     if (tree.winners.winnersLvlTwo.includes(node.label)) {
-      //       this.setVotedRecursive2(node, tree, 'second-voted-font-magenta');
-      //     }
-      //     if (tree.winners.winnersLvlThree.includes(node.label)) {
-      //       this.setVotedRecursive2(node, tree, 'third-voted-font-magenta');
-      //     }
-      //     if (tree.winners.winnersLvlFour.includes(node.label)) {
-      //       this.setVotedRecursive2(node, tree, 'fourth-voted-font-magenta');
-      //     }
-      //     if (tree.winners.winnersLvlFive.includes(node.label)) {
-      //       this.setVotedRecursive2(node, tree, 'fifth-voted-font-magenta');
-      //     }
-      //   }
-      // }
       this.setVotedRecursive(node, tree);
     });
   }
@@ -181,50 +186,6 @@ export class DashboardComponent implements OnInit {
     if (tree.winners.winnersLvlOne !== null) {
       if (tree.winners.winnersLvlOne.includes(node.label)) {
         node.styleClass = 'most-voted-font-magenta';
-        if (node.children) {
-          node.children.forEach(childNode => {
-            childNode.styleClass = 'node-font-black';
-          });
-        }
-      }
-    }
-
-    if (tree.winners.winnersLvlTwo !== null) {
-      if (tree.winners.winnersLvlTwo.includes(node.label)) {
-        node.styleClass = 'second-voted-font-magenta';
-        if (node.children) {
-          node.children.forEach(childNode => {
-            childNode.styleClass = 'node-font-black';
-          });
-        }
-      }
-    }
-
-    if (tree.winners.winnersLvlThree !== null) {
-      if (tree.winners.winnersLvlThree.includes(node.label)) {
-        node.styleClass = 'third-voted-font-magenta';
-        if (node.children) {
-          node.children.forEach(childNode => {
-            childNode.styleClass = 'node-font-black';
-          });
-        }
-      }
-    }
-
-    if (tree.winners.winnersLvlFour !== null) {
-      if (tree.winners.winnersLvlFour.includes(node.label)) {
-        node.styleClass = 'forth-voted-font-magenta';
-        if (node.children) {
-          node.children.forEach(childNode => {
-            childNode.styleClass = 'node-font-black';
-          });
-        }
-      }
-    }
-
-    if (tree.winners.winnersLvlFive !== null) {
-      if (tree.winners.winnersLvlFive.includes(node.label)) {
-        node.styleClass = 'fifth-voted-font-magenta';
         if (node.children) {
           node.children.forEach(childNode => {
             childNode.styleClass = 'node-font-black';

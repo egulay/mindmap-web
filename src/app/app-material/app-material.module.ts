@@ -13,7 +13,8 @@ import {
   MatSidenavModule,
   MatSlideToggleModule,
   MatSelectModule,
-  MatDialogModule
+  MatDialogModule,
+  MatTableModule
 } from '@angular/material';
 
 @NgModule({
@@ -31,7 +32,8 @@ import {
     MatSidenavModule,
     MatSlideToggleModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule
   ]
 })
 export class AppMaterialModule {

@@ -25,6 +25,10 @@ h1, h2, h3, h4 {
 //  min-height: 100% !important;
 //}
 
+.mat-list-item {
+  float: left;
+}
+
 .t-mobile-header-image {
   background-image: url(t-mobile-icon.png);
   background-size: cover;
@@ -73,33 +77,33 @@ h1, h2, h3, h4 {
   font-family: 'Roboto', sans-serif;
 }
 
-.second-voted-font-magenta span.ui-treenode-label {
-  color: #D90075 !important;
-  font-size: x-large !important;
-  font-weight: bold !important;
-  font-family: 'Roboto', sans-serif;
-}
-
-.third-voted-font-magenta span.ui-treenode-label {
-  color: #E4007A !important;
-  font-size: large !important;
-  font-weight: bold !important;
-  font-family: 'Roboto', sans-serif;
-}
-
-.forth-voted-font-magenta span.ui-treenode-label {
-  color: #F00080 !important;
-  font-size: medium !important;
-  font-weight: bold !important;
-  font-family: 'Roboto', sans-serif;
-}
-
-.fifth-voted-font-magenta span.ui-treenode-label {
-  color: #E96088 !important;
-  font-size: medium !important;
-  font-weight: normal !important;
-  font-family: 'Roboto', sans-serif;
-}
+//.second-voted-font-magenta span.ui-treenode-label {
+//  color: #D90075 !important;
+//  font-size: x-large !important;
+//  font-weight: bold !important;
+//  font-family: 'Roboto', sans-serif;
+//}
+//
+//.third-voted-font-magenta span.ui-treenode-label {
+//  color: #E4007A !important;
+//  font-size: large !important;
+//  font-weight: bold !important;
+//  font-family: 'Roboto', sans-serif;
+//}
+//
+//.forth-voted-font-magenta span.ui-treenode-label {
+//  color: #F00080 !important;
+//  font-size: medium !important;
+//  font-weight: bold !important;
+//  font-family: 'Roboto', sans-serif;
+//}
+//
+//.fifth-voted-font-magenta span.ui-treenode-label {
+//  color: #E96088 !important;
+//  font-size: medium !important;
+//  font-weight: normal !important;
+//  font-family: 'Roboto', sans-serif;
+//}
 
 .node-font-black span.ui-treenode-label {
   color: #000000 !important;
