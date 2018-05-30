@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
         {
           label: split[0],
           icon: 'fa-file-o',
-          expanded: true,
+          expanded: false,
         }
       ];
     }
@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit {
         children: this.reducePath(n.children, split.slice(1).join('|'))
       });
     });
-  };
+  }
 
   getITData() {
     this.files = [];
@@ -91,35 +91,43 @@ export class DashboardComponent implements OnInit {
   }
 
   addNew(file: TreeNode) {
+    const deptId = '5b0be222f3be1b388cdc8dfd';
+
     const dialogRef = this.dialog.open(AddNewNodeDialogComponent, {
       autoFocus: false,
       width: '600px',
-      height: '400px',
-      data: {label: this.newLabel}
+      height: '280px',
+      data: {labelName: this.newLabel}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      const node: NewNode = {
-        departmentId: '5b0be222f3be1b388cdc8dfd',
-        label: result,
-        parentLabel: file.label
-      };
+      if (typeof result !== 'undefined') {
+        const node: NewNode = {
+          departmentId: deptId,
+          label: result,
+          parentLabel: file.label
+        };
 
-      this.nodeService.saveNode(node).then(() => this.getITData());
+        this.nodeService.saveNode(node).then(files => {
+          this.files = [];
+          this.files = files.treeNodes.reduce(this.reducePath, []);
+          this.setVoted(files.voteWinnerLabel);
 
-      this.snackBar.open('Saved: '.concat(node.label), 'Info', {
-        duration: 2000,
-        politeness: 'assertive'
-      });
+          this.snackBar.open('Saved: '.concat(node.label), 'Info', {duration: 2000, politeness: 'assertive'});
+        });
+      }
     });
-
-
   }
 
   vote(file: TreeNode) {
-    this.snackBar.open('Voted: '.concat(file.label), 'Info', {
-      duration: 2000,
-      politeness: 'assertive'
+    this.nodeService.addVote('5b0be222f3be1b388cdc8dfd', file.label).then(files => {
+      this.files = [];
+      this.files = files.treeNodes.reduce(this.reducePath, []);
+      this.setVoted(files.voteWinnerLabel);
+      this.snackBar.open('Voted: '.concat(file.label), 'Info', {
+        duration: 2000,
+        politeness: 'assertive'
+      });
     });
   }
 
@@ -132,10 +140,15 @@ export class DashboardComponent implements OnInit {
   setVotedRecursive(node: TreeNode, label: String) {
     if (node.label === label) {
       node.styleClass = 'voted-font-magenta';
+      if (node.children) {
+        node.children.forEach(childNode => {
+          childNode.styleClass = 'node-font-black';
+        });
+      }
     }
+
     if (node.children) {
       node.children.forEach(childNode => {
-        childNode.styleClass = 'node-font-black';
         this.setVotedRecursive(childNode, label);
       });
     }

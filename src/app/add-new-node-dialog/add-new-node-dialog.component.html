@@ -1,3 +1,21 @@
-<p>
-  add-new-node-dialog works!
-</p>
+<mat-card class="login-card">
+  <mat-card-header>
+    <div mat-card-avatar class="t-mobile-header-image"></div>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <mat-card-title>Add New Label</mat-card-title>
+    <mat-card-subtitle>Please provide label name</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="newLabelForm" (ngSubmit)="onSubmit()" autocomplete="off">
+      <p>
+        <mat-form-field class="login-full-width">
+          <input matInput placeholder="Label Name" formControlName="labelName" required>
+          <mat-error *ngIf="isFieldInvalid('labelName')">
+            Label Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+        <button #btnSave mat-raised-button color="primary" (keyup.enter)="onSubmit()">Save</button>
+    </form>
+  </mat-card-content>
+</mat-card>
