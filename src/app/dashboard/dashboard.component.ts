@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth/auth.service';
 import {MenuItem, TreeNode} from 'primeng/api';
@@ -10,7 +10,8 @@ import {AddNewNodeDialogComponent} from '../add-new-node-dialog/add-new-node-dia
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DashboardComponent implements OnInit {
 
@@ -136,25 +137,26 @@ export class DashboardComponent implements OnInit {
 
   setVoted(label: String, tree: TreeStructure.TreeNodes) {
     this.files.forEach(node => {
-      if (tree.winners.allWinners !== null) {
-        if (tree.winners.allWinners.includes(node.label)) {
-          if (tree.winners.winnersLvlOne.includes(node.label)) {
-            this.setVotedRecursive2(node, tree, 'most-voted-font-magenta');
-          }
-          if (tree.winners.winnersLvlTwo.includes(node.label)) {
-            this.setVotedRecursive2(node, tree, 'second-voted-font-magenta');
-          }
-          if (tree.winners.winnersLvlThree.includes(node.label)) {
-            this.setVotedRecursive2(node, tree, 'third-voted-font-magenta');
-          }
-          if (tree.winners.winnersLvlFour.includes(node.label)) {
-            this.setVotedRecursive2(node, tree, 'fourth-voted-font-magenta');
-          }
-          if (tree.winners.winnersLvlFive.includes(node.label)) {
-            this.setVotedRecursive2(node, tree, 'fifth-voted-font-magenta');
-          }
-        }
-      }
+      // if (tree.winners.allWinners !== null) {
+      //   if (tree.winners.allWinners.includes(node.label)) {
+      //     if (tree.winners.winnersLvlOne.includes(node.label)) {
+      //       this.setVotedRecursive2(node, tree, 'most-voted-font-magenta');
+      //     }
+      //     if (tree.winners.winnersLvlTwo.includes(node.label)) {
+      //       this.setVotedRecursive2(node, tree, 'second-voted-font-magenta');
+      //     }
+      //     if (tree.winners.winnersLvlThree.includes(node.label)) {
+      //       this.setVotedRecursive2(node, tree, 'third-voted-font-magenta');
+      //     }
+      //     if (tree.winners.winnersLvlFour.includes(node.label)) {
+      //       this.setVotedRecursive2(node, tree, 'fourth-voted-font-magenta');
+      //     }
+      //     if (tree.winners.winnersLvlFive.includes(node.label)) {
+      //       this.setVotedRecursive2(node, tree, 'fifth-voted-font-magenta');
+      //     }
+      //   }
+      // }
+      this.setVotedRecursive(node, tree);
     });
   }
 
