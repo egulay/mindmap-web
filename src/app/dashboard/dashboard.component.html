@@ -4,7 +4,9 @@
     <mat-card-subtitle>Most Popular</mat-card-subtitle>
     <mat-list>
       <mat-list-item *ngFor="let i of popularItems">
-        <span>{{i.position}}. {{i.items}}</span>
+        <!-- <span [ngStyle]="{'color': i.position === 1 ? '#ea0a8e': (i.position === 2) ? '#D90075': (i.position === 3) ? '#E4007A' : (i.position === 4) ? '#F00080' : '#E96088'} ">{{i.position}}. {{i.items}}</span>-->
+        <span [ngClass]="{'winnerOne' : i.position === 1, 'winnerTwo': i.position === 2, 'winnerThree': i.position === 3,
+            'winnerFour': i.position === 4, 'winnerFive': i.position === 5}">{{i.position}}. {{i.items}}</span>
       </mat-list-item>
     </mat-list>
   </mat-card-header>

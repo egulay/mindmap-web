@@ -83,11 +83,11 @@ export class DashboardComponent implements OnInit {
       this.setVoted(files.rootLabel, files);
 
       this.popularItems = [
-        {position: 1, items: files.winners.winnersLvlOne !== null ? files.winners.winnersLvlOne.toString() : ''},
-        {position: 2, items: files.winners.winnersLvlTwo !== null ? files.winners.winnersLvlTwo.toString() : ''},
-        {position: 3, items: files.winners.winnersLvlThree !== null ? files.winners.winnersLvlThree.toString() : ''},
-        {position: 4, items: files.winners.winnersLvlFour !== null ? files.winners.winnersLvlFour.toString() : ''},
-        {position: 5, items: files.winners.winnersLvlFive !== null ? files.winners.winnersLvlFive.toString() : ''}
+        {position: 1, items: files.winners.winnersLvlOne !== null ? files.winners.winnersLvlOne.toString().split(',').join(', ') : ''},
+        {position: 2, items: files.winners.winnersLvlTwo !== null ? files.winners.winnersLvlTwo.toString().split(',').join(', ') : ''},
+        {position: 3, items: files.winners.winnersLvlThree !== null ? files.winners.winnersLvlThree.toString().split(',').join(', ') : ''},
+        {position: 4, items: files.winners.winnersLvlFour !== null ? files.winners.winnersLvlFour.toString().split(',').join(', ') : ''},
+        {position: 5, items: files.winners.winnersLvlFive !== null ? files.winners.winnersLvlFive.toString().split(',').join(', ') : ''}
       ];
 
     });
@@ -125,11 +125,16 @@ export class DashboardComponent implements OnInit {
           this.setVoted(files.rootLabel, files);
 
           this.popularItems = [
-            {position: 1, items: files.winners.winnersLvlOne !== null ? files.winners.winnersLvlOne.toString() : ''},
-            {position: 2, items: files.winners.winnersLvlTwo !== null ? files.winners.winnersLvlTwo.toString() : ''},
-            {position: 3, items: files.winners.winnersLvlThree !== null ? files.winners.winnersLvlThree.toString() : ''},
-            {position: 4, items: files.winners.winnersLvlFour !== null ? files.winners.winnersLvlFour.toString() : ''},
-            {position: 5, items: files.winners.winnersLvlFive !== null ? files.winners.winnersLvlFive.toString() : ''}
+            {position: 1, items: files.winners.winnersLvlOne !== null
+                ? files.winners.winnersLvlOne.toString().split(',').join(', ') : ''},
+            {position: 2, items: files.winners.winnersLvlTwo !== null
+                ? files.winners.winnersLvlTwo.toString().split(',').join(', ') : ''},
+            {position: 3, items: files.winners.winnersLvlThree !== null
+                ? files.winners.winnersLvlThree.toString().split(',').join(', ') : ''},
+            {position: 4, items: files.winners.winnersLvlFour !== null
+                ? files.winners.winnersLvlFour.toString().split(',').join(', ') : ''},
+            {position: 5, items: files.winners.winnersLvlFive !== null
+                ? files.winners.winnersLvlFive.toString().split(',').join(', ') : ''}
           ];
 
           this.snackBar.open('Saved: '.concat(node.label), 'Info', {duration: 2000, politeness: 'assertive'});
@@ -144,11 +149,11 @@ export class DashboardComponent implements OnInit {
       this.files = files.treeNodes.reduce(this.reducePath, []);
 
       this.popularItems = [
-        {position: 1, items: files.winners.winnersLvlOne !== null ? files.winners.winnersLvlOne.toString() : ''},
-        {position: 2, items: files.winners.winnersLvlTwo !== null ? files.winners.winnersLvlTwo.toString() : ''},
-        {position: 3, items: files.winners.winnersLvlThree !== null ? files.winners.winnersLvlThree.toString() : ''},
-        {position: 4, items: files.winners.winnersLvlFour !== null ? files.winners.winnersLvlFour.toString() : ''},
-        {position: 5, items: files.winners.winnersLvlFive !== null ? files.winners.winnersLvlFive.toString() : ''}
+        {position: 1, items: files.winners.winnersLvlOne !== null ? files.winners.winnersLvlOne.toString().split(',').join(', ') : ''},
+        {position: 2, items: files.winners.winnersLvlTwo !== null ? files.winners.winnersLvlTwo.toString().split(',').join(', ') : ''},
+        {position: 3, items: files.winners.winnersLvlThree !== null ? files.winners.winnersLvlThree.toString().split(',').join(', ') : ''},
+        {position: 4, items: files.winners.winnersLvlFour !== null ? files.winners.winnersLvlFour.toString().split(',').join(', ') : ''},
+        {position: 5, items: files.winners.winnersLvlFive !== null ? files.winners.winnersLvlFive.toString().split(',').join(', ') : ''}
       ];
 
       this.setVoted(files.rootLabel, files);
